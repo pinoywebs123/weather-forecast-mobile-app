@@ -1,14 +1,48 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      <h2 text-center>Weather Forecast App</h2>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-row>
+    <ion-item>
+      <ion-label fixed>Search: </ion-label>
+      <ion-input type="text" aria-placeholder="Quezon City" [(ngModel)]="search"></ion-input>
+    </ion-item>
+  </ion-row>
+  <div *ngIf="weather">
+    <h3 text-center>{{weather.display_location.full}}</h3>
+    <p text-center><img src="{{weather.icon_url}}" width="120px"></p>
+    <h3 text-center>{{weather.weather}}</h3>
+
+    <ion-list>
+      <ion-item>
+        <ion-icon name="ios-body-outline" item-start></ion-icon>
+        Feeling like: {{weather.feelslike_string}}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-cog-outline" item-start></ion-icon>
+        Heat: {{weather.heat_index_string}}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-compass-outline" item-start></ion-icon>
+        Wind: {{weather.wind_string}}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="forecast">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3 *ngFor="let aw of forecast">
+          <p>{{aw.title}}</p>
+          <p><img src="{{aw.icon_url}}" width="30px"></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
 </ion-content>
